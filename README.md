@@ -21,5 +21,5 @@ An LDAP directory has a tree structure (Data Information Trees, DIT). This struc
 
 The top of the DIT tree hierarchy consists of a root element. This element usually contains entries of type c (country), dc (domain component), or o (organization) as subordinate elements, and these in turn contain organizational entries, ou (organizational unit). The determination of the type of entries is usually done following a scheme although this is not mandatory. The type of an entry is determined by the object class that determines which attributes the entry in question must or can be assigned. 
 
-![LDAPStructure](https://docs.oracle.com/cd/E19182-01/820-6573/images/LDAP_Directory_Strucuture.gif)
+![LDAPStructure](https://docs.oracle.com/cd/E19182-01/820-6573/images/LDAP_Directory_Strucuture.gif) <br>
 *Image obtained from: https://docs.oracle.com/cd/E19182-01/820-6573/6nht2e5a4/index.html*
