@@ -40,11 +40,11 @@ The attributes are the lowest level elements of an LDAP system and are the ones 
 Object classes are containers of attributes. They specify attribute groupings that describe particular entities (for example, 'person' is an Object Class). Each entry has a structural object class, which indicates which object type an entry represents, and you can also have further auxiliary object classes if additional attributes or characteristics are required for that entry.
 
 Then to create an entry that describes a person, you have to include the objectClass person: <br> 
-  dn: . . .<br> 
-  objectClass: person <br> <br> 
+  _dn: . . ._ <br> 
+  _objectClass: person_ <br> <br> 
 
 This allows you to set all the attributes concerning the person within the entry: <br> 
-  cn: common name <br> 
-  sn: last name <br> 
-  userPassword: password for the user <br> 
-  … <br> 
+  _cn: common name_ <br> 
+  _sn: last name_ <br> 
+  _userPassword: password for the user_ <br> 
+  _…_ <br> 
