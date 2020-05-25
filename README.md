@@ -127,6 +127,100 @@ olcAccess: {1}to dn.base="" by * read
 olcAccess: {2}to * by dn="cn=admin,dc=example,dc=com" write by * read
 ```
 
+Then add the above configuration to the LDAP database with the command:
+
+_$ ldapmodify -Y EXTERNAL -H ldapi:/// -f mod_domain.ldif_
+
+The following command can be used to verify that the changes have been made correctly:
+
+_$ ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config olcDatabase={2}mdb -LLL_
+ó
+_$ ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config olcDatabase=\*
+$ ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config olcDatabase={1}monitor -LLL_
+
+You can also check the configuration:
+
+_$ slaptest -u_
+
+_** Explanation of the previous file **
+To configure the database, you must modify the backend of the primary database (/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif) and also the access control list for the LDAP monitor backend (olcDatabase\={1}monitor.ldif).
+These modifications are not made directly on these files, instead they are made by generating an .ldif file containing the modifications. 
+In the .ldif file, to identify the element on which you want to act, its DN is used. Then the first line in the file must be the DN: dn: olcDatabase={2}hdb,cn=config. In the next line you have to specify if you want to add or modify, this is done through: changeType: modify. Then you must specify the element to be replaced or if you want to delete it: replace: olcSuffix. And finally write the new value of the changed attribute: olcSuffix: dc=domain,dc=local._
+
+The next action to be taken is to generate the structure of our LDAP directory. To do this, first create the directory base (_dn: dc=example,dc=com_) and the administrator user (_dn: cn=admin,dc=example,dc=com_), and then add the organizational structures for the users (_dn: ou=users_) and for the user groups (_dn: ou=groups_). For each of these elements you have to specify a series of attributes, which depending on the type of object you create, you will have to specify one attribute or another. This, again, is done through an _.ldif_ file:
+
+```
+dn: dc=example,dc=com
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+o: Example Com
+dc: Example
+
+dn: cn=admin,dc=example,dc=com
+objectClass: organizationalRole
+cn: admin
+description: LDAP Directory Manager
+
+dn: ou=People,dc=example,dc=com
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Group,dc=example,dc=com
+objectClass: organizationalUnit
+ou: Group
+```
+
+And to add the changes to the database:
+
+_$ ldapadd -x -D cn=admin,dc=example,dc=com -W -f basedn.ldif_
+
+Finally, the process of adding users and groups is again done from an .ldif file (this can be done in two different files):
+
+```
+dn: uid=usuario,ou=People,dc=example,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Nombre
+sn: Usuario
+userPassword: {SSHA}QLXFlVsiNY7bLgcwx8yurJqMZVaErD9b
+loginShell: /bin/bash
+uidNumber: 10000
+gidNumber: 10000
+homeDirectory: /home/usuario
+
+dn: cn=departamento,ou=Group,dc=example,dc=com
+objectClass: posixGroup
+cn: Departamento
+gidNumber: 10000
+member: cn=usuario,ou=users,dc=example,dc=com
+```
+
+And to be effective:
+
+_$ ldapadd -x -D cn=adminr,dc=example,dc=com -W -f add_user.ldif_
+
+As it is the case of the previous example, if you want to add the password to the user, previously you must create and encrypt the user's password and the SSHA obtained is passed to the previous process (although in some OS you can write it directly). 
+
+Again to verify that the user has been created successfully:
+
+_$ ldapsearch -x uid=amosm -b dc=example,dc=com -LLL_
+
+To delete an entry, use the following command with the name of the entry to be deleted:
+
+_$ ldapdelete "cn=user,ou=users,dc=example,dc=com" -D cn=admin,dc=example,dc=com -w password_
+
+Finally, the LDAP service must be allowed in the __firewall__:
+
+_$ firewall-cmd --add-service={ldap,ldaps} --permanent
+$ firewall-cmd --reload_
+
+ó
+
+_$ firewall-cmd --permanent --add-service=ldapfirewall-cmd -reload_
+
+
 ### Installation of the OpenLDAP server (Ubuntu)
 
 ### Installation of the OpenLDAP client (Ubuntu)
