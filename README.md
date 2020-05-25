@@ -10,6 +10,7 @@ UNDER CONSTRUCTION
 * [LDAP structure](#ldap-structure)
 * [Basic components of LDAP](#basic-components-of-ldap)
 * [OpenLDAP installation](#openldap-installation)
+  * [Installation of the OpenLDAP server (Ubuntu)](installation-of-the-openldap-server-(ubuntu))
 
 ====================
 
