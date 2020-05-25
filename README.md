@@ -90,9 +90,9 @@ _$ chown -R ldap:ldap /var/lib/ldap_
 
 Next, the basic OpenLDAP schemes must be imported:
 
-_$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif_
-_$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif_
-_$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif_
+_$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif_ <br>
+_$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif_ <br>
+_$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif_ <br>
 
 ### Installation of the OpenLDAP server (Ubuntu)
 
