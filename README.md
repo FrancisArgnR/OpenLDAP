@@ -9,6 +9,7 @@ UNDER CONSTRUCTION
 * [Introduction](#introduction)
 * [LDAP structure](#ldap-structure)
 * [Basic components of LDAP](#basic-components-of-ldap)
+* [OpenLDAP installation](#openldap-installation)
 
 ====================
 
@@ -48,3 +49,51 @@ This allows you to set all the attributes concerning the person within the entry
   _sn: last name_ <br> 
   _userPassword: password for the user_ <br> 
   _…_ <br> 
+
+## OpenLDAP installation
+
+### Previous recommendations
+
+Before deploying OpenLDAP it would be convenient to update the system packages (e.g. Fedora):
+
+_$ dnf update_
+_$ dnf upgrade_
+
+### Installation of the OpenLDAP server (Fedora)
+
+To __install__ OpenLDAP, it is necessary to install the openldap packages along with the server and client package:
+
+_$ dnf -y install openldap openldap-servers openldap-clients_
+
+To __enable__ (start automatically at boot time) and __start__ the OpenLDAP server service you have to run:
+
+_$ systemctl enable slapd_
+_$ systemctl start slapd_
+
+After installation, the LDAP administrator password must be established. This is done with the following command:
+
+_$ slappasswd_
+
+Although you can also establish the password on the same line:
+
+_$ slappasswd -h {SHA} -s password_
+
+The OpenLDAP configuration files can be found in the _/etc/openldap/slapd.d_ directory, and although it is possible to modify them directly it is not recommended.
+
+To __configure__ the OpenLDAP database, first copy the database configuration by renaming it as follows:
+
+_$ cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG_
+
+And set the property of the LDAP database configuration directory to the ldap user.
+
+_$ chown -R ldap:ldap /var/lib/ldap_
+
+Next, the basic OpenLDAP schemes must be imported:
+
+_$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif_
+_$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif_
+_$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif_
+
+### Installation of the OpenLDAP server (Ubuntu)
+
+### Installation of the OpenLDAP client (Ubuntu)
