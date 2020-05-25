@@ -94,6 +94,39 @@ _$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif_ <br>
 _$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif_ <br>
 _$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif_ <br>
 
+At this point we have to generate the configuration of our basic scheme. To do this we have to modify the configuration file of the OpenLDAP database to replace the default domain/suffix of the Directory Information Tree (DIT) with the one we want to have. To do this it is necessary to modify the values of the attributes: _olcSuffix_ (base domain), _olcRootDN_ (administrator user name) and _olcAccess_ (password access permission). The way to make these modifications is by creating an _.ldif_ file as shown below:
+
+```
+dn: olcDatabase={1}monitor,cn=config
+changetype: modify
+replace: olcAccess
+olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+  read by dn.base="cn=admin,dc=example,dc=com" read by * none
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+replace: olcSuffix
+olcSuffix: dc=example,dc=com
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+replace: olcRootDN
+olcRootDN: cn=admin,dc=example,dc=com
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}PASSWORD
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+add: olcAccess
+olcAccess: {0}to attrs=userPassword,shadowLastChange by
+  dn="cn=admin,dc=example,dc=com" write by anonymous auth by self write by * none
+olcAccess: {1}to dn.base="" by * read
+olcAccess: {2}to * by dn="cn=admin,dc=example,dc=com" write by * read
+```
+
 ### Installation of the OpenLDAP server (Ubuntu)
 
 ### Installation of the OpenLDAP client (Ubuntu)
