@@ -12,6 +12,11 @@ UNDER CONSTRUCTION
 * [OpenLDAP installation](#openldap-installation)
   * [Installation of the OpenLDAP server (Fedora)](#installation-of-the-openldap-server-fedora)
   * [Installation of the OpenLDAP server (Ubuntu)](#installation-of-the-openldap-server-ubuntu)
+  * [Installation of the OpenLDAP client (Ubuntu)](#installation-of-the-openldap-client-ubuntu)
+* [OpenLDAP management functionalities](#openldap-management-functionalities)
+  * [Basic commands](#basic-commands)
+  * [Web interface](#web-interface)
+* [References](#references)
 
 ====================
 
@@ -333,4 +338,46 @@ To verify that the client configuration has been done correctly, check that a us
 _$ getent passwd user_
 
 
+## OpenLDAP MANAGEMENT FUNCTIONALITIES
 
+### Basic commands
+
+The most commonly used OpenLDAP commands include the following:
+   - ldapbind: used to authenticate to a directory server.
+   - ldapsearch: used to search for specific entries in a directory.
+   - ldapadd: used to add entries to a directory.
+   - ldapdelete: used to delete entries in a directory.
+   - ldapmodify: used to modify existing entries in a directory.
+   - ldapmoddn: used to change the name of an entry or to move a subtree to another location in the directory.
+
+### Web interface
+
+As seen during the installation processes, LDAP allows you to work with commands and _.ldif_ files to create and modify elements of the LDAP directory, but this can sometimes be a little difficult. LDAP offers LDAP directory browsers that make this task easier. Here we can highlight __phpldapadmin__, which is a graphical administration tool for managing LDAP servers. It can be installed as follows, which will enable the necessary Apache settings:
+
+_(Fedora) $ yum -y install phpldapadmin_
+_(Ubuntu) $ sudo apt-get -y install phpldapadmin_
+
+Once installed, it is necessary to make some small configuration changes to use our domain. To do this you must edit the file _/etc/phpldapadmin/config.php_ and change the following lines:
+
+```
+$servers->setValue('server','name','OpenLDAP Server Name or IP');
+$servers->setValue('server','base', array('dc=example,dc=com'));
+#$servers->setValue('login','bind_id','cn=admin,dc=example,dc=com');
+$config->custom->appearance['hide_template_warning'] = true;
+```
+
+The first line refers to the name of your server, the second to which is the root of the directory, the third line should be commented as it auto-fills the admin login in the web interface, while the last one controls the visibility of some warning messages.
+
+Now that the web interface is configured, the way to access it from the web browser is as follows:
+
+https://example.com/phpldapadmin
+
+Where a home page appears for logging in. The login DN is the user name that is used, containing the account name (cn), and the server domain name (dc). 
+
+![web](https://tr1.cbsistatic.com/hub/i/r/2016/12/01/0a8ad7b4-1684-4295-84c8-64bfe33ee6b9/resize/1200x/a773679c11ab780c1513b5a5d3d342d1/ldapb.jpg)
+*Image obtained from: https://www.techrepublic.com/article/how-to-install-and-configure-ldap-and-phpldapadmin/*
+
+Once connected you have the possibility to add users, organizational units, groups and relationships.
+
+
+## References
