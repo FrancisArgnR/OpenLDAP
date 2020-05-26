@@ -381,3 +381,33 @@ Once connected you have the possibility to add users, organizational units, grou
 
 
 ## References
+
+LDAP definition <br>
+https://www.zytrax.com/books/ldap/ch2/index.html <br>
+https://www.pks.mpg.de/~mueller/docs/suse10.1/suselinux-manual_en/manual/sec.ldap.tree.html <br>
+https://www.digitalocean.com/community/tutorials/understanding-the-ldap-protocol-data-hierarchy-and-entry-components <br>
+https://github.com/manuparra/docker_ldap <br>
+
+Server installation <br>
+https://likegeeks.com/es/servidor-ldap-de-linux/ <br>
+https://kifarunix.com/install-and-configure-openldap-server-on-fedora-29/ <br>
+https://www.server-world.info/en/note?os=Fedora_28&p=openldap&f=1 <br>
+https://www.tecmint.com/install-openldap-server-for-centralized-authentication/ <br>
+https://instructorbenyblanco.wordpress.com/configuracion-basica-de-servidor-ldap/ <br>
+https://www.techrepublic.com/article/how-to-install-openldap-on-ubuntu-18-04/ <br>
+
+Client installation <br>
+https://www.tecmint.com/configure-ldap-client-to-connect-external-authentication/ <br>
+https://computingforgeeks.com/how-to-configure-ubuntu-18-04-ubuntu-16-04-lts-as-ldap-client/ <br>
+https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/configure-ldap-client-on-ubuntu-16-04-debian-8.html <br>
+https://www.howtoforge.com/set-up-openldap-client-on-debian-10/ <br>
+http://somebooks.es/12-9-configurar-un-equipo-cliente-con-ubuntu-para-autenticarse-en-el-servidor-openldap/ <br>
+
+Web interface <br>
+https://www.alibabacloud.com/blog/how-to-install-openldap-and-phpldapadmin-on-ubuntu-16-04_594318 <br>
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-openldap-and-phpldapadmin-on-ubuntu-16-04 <br>
+
+OpenLDAP commands <br>
+https://docs.oracle.com/cd/B10501_01/network.920/a96579/comtools.htm <br>
+https://docs.oracle.com/cd/E19455-01/806-5580/6jej518pf/index.html <br>
+
