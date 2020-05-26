@@ -10,8 +10,8 @@ UNDER CONSTRUCTION
 * [LDAP structure](#ldap-structure)
 * [Basic components of LDAP](#basic-components-of-ldap)
 * [OpenLDAP installation](#openldap-installation)
-  * [Installation of the OpenLDAP server (Fedora)](installation-of-the-openldap-server-fedora)
-  * [Installation of the OpenLDAP server (Ubuntu)](installation-of-the-openldap-server-ubuntu)
+  * [Installation of the OpenLDAP server (Fedora)](#installation-of-the-openldap-server-fedora)
+  * [Installation of the OpenLDAP server (Ubuntu)](#installation-of-the-openldap-server-ubuntu)
 
 ====================
 
@@ -234,9 +234,9 @@ During the installation of the package, the administration password will be requ
 
 The following commands are used to __start__ the OpenLDAP daemon, to __enable__ autostarting at server startup and to check the status:
 
-_$ sudo systemctl start slapd_
-_$ sudo systemctl enable slapd_
-_$ sudo systemctl status slapd_
+_$ sudo systemctl start slapd_ <br>
+_$ sudo systemctl enable slapd_ <br>
+_$ sudo systemctl status slapd_ <br>
 
 In addition, the __firewall must be opened__ to allow requests to the LDAP server daemon:
 
@@ -264,9 +264,73 @@ _$ sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f ldapdomain.ldif_
 ** Alternative process **
 Ubuntu offers an alternative configuration process to the previous one that can be performed automatically. To do so, you must execute the following command and enter a series of parameters:
 
-$ sudo dpkg-reconfigure slapd
+_$ sudo dpkg-reconfigure slapd_
 
+The next action to be taken is to generate our LDAP directory structure (for details see again what was done in the Fedora installation above). And add the modification made to LDAP:
 
+_$ sudo ldapadd -Y EXTERNAL -x -D cn=admin,dc=example,dc=com -W -f basedn.ldif_
+
+Once the organizational structures are added, the first groups and users are then added using an _.ldif_ file (see these files in more detail in the previous Fedora installation):
+
+_$ ldapadd -x -D cn=admin,dc=example,dc=com -W -f add_user.ldif_
+
+To add the password to the user, it is necessary to have previously generated the encrypted password to pass it in the _.ldif_ file.
+
+_$ sudo useradd tecmint_ <br>
+_$ sudo passwd tecmint_ <br>
 
 
 ### Installation of the OpenLDAP client (Ubuntu)
+
+Once an OpenLDAP server is configured, the client needs to be installed and configured in order to connect. First, several packages need to be installed:
+
+_$ sudo apt –y install libnss-ldap libpam-ldap ldap-utils nscd_
+
+During the installation, the package installer will require a few parameters from the server for configuration (the ldap-auth-config package that is installed automatically does most of the configuration). You will be asked to enter the OpenLDAP server address, the domain name (dc: example, dc: com), the LDAP version, the administration account, etc. If during the installation process we detect any error or we have introduced some parameter incorrectly, we can always do it again by executing the command:
+
+_$ sudo dpkg-reconfigure ldap-auth-config_
+
+The installer does much of the configuration, but there are still some details to make LDAP authentication work, so we will need to adjust the behavior of the NSS and PAM services. First you have to modify the NSSwitch configuration (in the _/etc/nsswitch.conf file_) to use LDAP as a data source by adding the lines:
+
+```
+passwd:         compat ldap
+group:          compat ldap
+shadow:         compat ldap
+```
+
+This can also be done automatically as follows:
+
+_$ sudo auth-client-config -t nss -p lac_ldap_
+
+Next, the use of LDAP for authentication is configured by updating the PAM settings:
+
+_$ sudo pam-auth-update_
+
+Finally, if you want to establish a home directory to be created automatically with the first login of the user, you have to add the following lines to the _/etc/pam.d/common-session_ file:
+
+```
+session required pam_mkhomedir.so skel=/etc/skel umask=077
+```
+
+In case the previous option does not work, add in _/usr/share/pam-configs/mkhomedir_:
+
+```
+Name: activate mkhomedir
+Default: yes
+Priority: 900
+Session-Type: Additional
+Session:
+required pam_mkhomedir.so umask=0022 skel=/etc/skel
+```
+
+The NCSD service is then restarted:
+
+_$ sudo systemctl restart nscd_ <br>
+_$ sudo systemctl enable nscd_ <br>
+
+To verify that the client configuration has been done correctly, check that a user can be obtained from the server:
+
+_$ getent passwd user_
+
+
+
