@@ -225,4 +225,48 @@ _$ firewall-cmd --permanent --add-service=ldapfirewall-cmd -reload_
 
 ### Installation of the OpenLDAP server (Ubuntu)
 
+If you are using Ubuntu as a system, the installation process is very similar. First of all you have to __install__ the slapd package and it is also convenient to install the ldap-utils package:
+
+_$ sudo apt-get install slapd_
+_$ sudo apt-get install ldap-utils_
+
+During the installation of the package, the administration password will be requested in the LDAP directory.
+
+The following commands are used to __start__ the OpenLDAP daemon, to __enable__ autostarting at server startup and to check the status:
+
+_$ sudo systemctl start slapd_
+_$ sudo systemctl enable slapd_
+_$ sudo systemctl status slapd_
+
+In addition, the __firewall must be opened__ to allow requests to the LDAP server daemon:
+
+_$ sudo ufw allow ldap_
+
+To __configure__ the LDAP database, copy the configuration file of the model database for slapd from the /var/lib/ldap directory:
+
+_$ sudo cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG_
+
+And establish the correct permissions for the file (and then restart the LDAP service):
+
+_$ sudo chown -R ldap:ldap /var/lib/ldap/DB_CONFIG_ <br>
+_$ sudo systemctl restart slapd_ <br>
+
+Some basic LDAP schemes are then imported from the _/etc/openldap/schema directory_ as follows:
+
+_$ sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif_ <br>
+_$ sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif_ <br>
+_$ sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif_ <br>
+
+The next step is to generate the __configuration of our basic scheme__. To do this you need to add your domain/suffix to the LDAP database. This is done by generating an .ldif file (see the full explanation of the file in the previous Fedora installation process) where we modify the values of the attributes: _olcSuffix, olcRootDN_ and _olcAccess_. To add the configuration to the database, you have to run the command:
+
+_$ sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f ldapdomain.ldif_
+
+** Alternative process **
+Ubuntu offers an alternative configuration process to the previous one that can be performed automatically. To do so, you must execute the following command and enter a series of parameters:
+
+$ sudo dpkg-reconfigure slapd
+
+
+
+
 ### Installation of the OpenLDAP client (Ubuntu)
