@@ -216,7 +216,7 @@ As it is the case of the previous example, if you want to add the password to th
 
 Again to verify that the user has been created successfully:
 
-_$ ldapsearch -x uid=amosm -b dc=example,dc=com -LLL_
+_$ ldapsearch -x uid=usuario -b dc=example,dc=com -LLL_
 
 To delete an entry, use the following command with the name of the entry to be deleted:
 
