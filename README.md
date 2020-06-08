@@ -364,7 +364,7 @@ The most commonly used OpenLDAP commands include the following:
 
 As seen during the installation processes, LDAP allows you to work with commands and _.ldif_ files to create and modify elements of the LDAP directory, but this can sometimes be a little difficult. LDAP offers LDAP directory browsers that make this task easier. Here we can highlight __phpldapadmin__, which is a graphical administration tool for managing LDAP servers. It can be installed as follows, which will enable the necessary Apache settings:
 
-_(Fedora) $ yum -y install phpldapadmin_
+_(Fedora) $ yum -y install phpldapadmin_ <br>
 _(Ubuntu) $ sudo apt-get -y install phpldapadmin_
 
 Once installed, it is necessary to make some small configuration changes to use our domain. To do this you must edit the file _/etc/phpldapadmin/config.php_ and change the following lines:
