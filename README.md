@@ -223,7 +223,7 @@ Again to verify that the user has been created successfully:
 
 _$ ldapsearch -x uid=usuario -b dc=example,dc=com -LLL_
 
-To delete an entry, use the following command with the name of the entry to be deleted:
+To delete an entry, use the following command with the name of the entry to be deleted (where the final password is the admin password):
 
 _$ ldapdelete "cn=user,ou=users,dc=example,dc=com" -D cn=admin,dc=example,dc=com -w password_
 
