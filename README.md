@@ -61,7 +61,7 @@ This allows you to set all the attributes concerning the person within the entry
 
 Before deploying OpenLDAP it would be convenient to update the system packages (e.g. Fedora):
 
-_$ dnf update_
+_$ dnf update_ <br>
 _$ dnf upgrade_
 
 ### Installation of the OpenLDAP server (Fedora)
