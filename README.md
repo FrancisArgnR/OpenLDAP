@@ -279,6 +279,8 @@ Ubuntu offers an alternative configuration process to the previous one that can 
 
 _$ sudo dpkg-reconfigure slapd_
 
+The automatic configuration already establishes the basis of the directory and the admin. Then it is not necessary to reload them when generating the structure with the basedn.ldif file. Otherwise, an error will be generated.
+
 #### LDAP structure generation
 
 The next action to be taken is to generate our LDAP directory structure (for details see again what was done in the Fedora installation above). And add the modification made to LDAP:
