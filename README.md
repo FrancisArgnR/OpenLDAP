@@ -210,9 +210,14 @@ member: cn=usuario,ou=users,dc=example,dc=com
 
 And to be effective:
 
-_$ ldapadd -x -D cn=adminr,dc=example,dc=com -W -f add_user.ldif_
+_$ ldapadd -x -D cn=admin,dc=example,dc=com -W -f add_user.ldif_
 
 As it is the case of the previous example, if you want to add the password to the user, previously you must create and encrypt the user's password and the SSHA obtained is passed to the previous process (although in some OS you can write it directly). 
+
+_$ slappasswd_ <br> 
+_$ New password: password_ <br> 
+_$ Re-enter new password: password_ <br> 
+_$ {SSHA}MI/malE7t763EWw7YiRzXsojGETmqMJq_ <br> 
 
 Again to verify that the user has been created successfully:
 
