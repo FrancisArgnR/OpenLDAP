@@ -66,6 +66,8 @@ _$ dnf upgrade_
 
 ### Installation of the OpenLDAP server (Fedora)
 
+#### Installation
+
 To __install__ OpenLDAP, it is necessary to install the openldap packages along with the server and client package:
 
 _$ dnf -y install openldap openldap-servers openldap-clients_
@@ -84,6 +86,8 @@ Although you can also establish the password on the same line:
 _$ slappasswd -h {SHA} -s password_
 
 The OpenLDAP configuration files can be found in the _/etc/openldap/slapd.d_ directory, and although it is possible to modify them directly it is not recommended.
+
+#### Configuration
 
 To __configure__ the OpenLDAP database, first copy the database configuration by renaming it as follows:
 
@@ -151,6 +155,8 @@ _** Explanation of the previous file **
 To configure the database, you must modify the backend of the primary database (/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif) and also the access control list for the LDAP monitor backend (olcDatabase\={1}monitor.ldif).
 These modifications are not made directly on these files, instead they are made by generating an .ldif file containing the modifications. 
 In the .ldif file, to identify the element on which you want to act, its DN is used. Then the first line in the file must be the DN: dn: olcDatabase={2}hdb,cn=config. In the next line you have to specify if you want to add or modify, this is done through: changeType: modify. Then you must specify the element to be replaced or if you want to delete it: replace: olcSuffix. And finally write the new value of the changed attribute: olcSuffix: dc=domain,dc=local._
+
+#### LDAP structure generation
 
 The next action to be taken is to generate the structure of our LDAP directory. To do this, first create the directory base (_dn: dc=example,dc=com_) and the administrator user (_dn: cn=admin,dc=example,dc=com_), and then add the organizational structures for the users (_dn: ou=users_) and for the user groups (_dn: ou=groups_). For each of these elements you have to specify a series of attributes, which depending on the type of object you create, you will have to specify one attribute or another. This, again, is done through an _.ldif_ file:
 
@@ -228,6 +234,8 @@ _$ firewall-cmd --permanent --add-service=ldapfirewall-cmd -reload_
 
 ### Installation of the OpenLDAP server (Ubuntu)
 
+#### Installation
+
 If you are using Ubuntu as a system, the installation process is very similar. First of all you have to __install__ the slapd package and it is also convenient to install the ldap-utils package:
 
 _$ sudo apt-get install slapd_ <br>
@@ -244,6 +252,8 @@ _$ sudo systemctl status slapd_ <br>
 In addition, the __firewall must be opened__ to allow requests to the LDAP server daemon:
 
 _$ sudo ufw allow ldap_
+
+#### Configuration
 
 To __configure__ the LDAP database, copy the configuration file of the model database for slapd from the /var/lib/ldap directory:
 
@@ -268,6 +278,8 @@ _$ sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f ldapdomain.ldif_
 Ubuntu offers an alternative configuration process to the previous one that can be performed automatically. To do so, you must execute the following command and enter a series of parameters:
 
 _$ sudo dpkg-reconfigure slapd_
+
+#### LDAP structure generation
 
 The next action to be taken is to generate our LDAP directory structure (for details see again what was done in the Fedora installation above). And add the modification made to LDAP:
 
