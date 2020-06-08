@@ -294,6 +294,15 @@ To add the password to the user, it is necessary to have previously generated th
 _$ sudo useradd tecmint_ <br>
 _$ sudo passwd tecmint_ <br>
 
+#### Uninstallation
+
+To uninstall the server is used:
+
+_sudo apt-get remove slapd_ <br>
+_sudo apt-get remove --purge slapd_ <br>
+_sudo apt-get remove ldap-utils_ <br>
+_sudo apt-get remove --purge ldap-utils_ <br>
+
 
 ### Installation of the OpenLDAP client (Ubuntu)
 
