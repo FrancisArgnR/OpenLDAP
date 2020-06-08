@@ -230,7 +230,7 @@ _$ firewall-cmd --permanent --add-service=ldapfirewall-cmd -reload_
 
 If you are using Ubuntu as a system, the installation process is very similar. First of all you have to __install__ the slapd package and it is also convenient to install the ldap-utils package:
 
-_$ sudo apt-get install slapd_
+_$ sudo apt-get install slapd_ <br>
 _$ sudo apt-get install ldap-utils_
 
 During the installation of the package, the administration password will be requested in the LDAP directory.
