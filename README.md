@@ -371,6 +371,21 @@ The most commonly used OpenLDAP commands include the following:
    - ldapmodify: used to modify existing entries in a directory.
    - ldapmoddn: used to change the name of an entry or to move a subtree to another location in the directory.
 
+### Concrete commands
+
+To access to the information of Root DSE, which is the structure that holds our DIT, we use:
+
+_$ ldapsearch -H ldap:// -x -s base -b "" -LLL "+"_
+
+If we wat to know the base entry of the DIT:
+
+_$ ldapsearch -H ldap:// -x -s base -b "" -LLL "namingContexts"_
+
+Finding the administration entry of the rootDN of the DIT we do:
+
+_$ sudo ldapsearch -H ldapi:// -Y EXTERNAL -b "cn=config" "(olcRootDN=*)" olcSuffix olcRootDN olcRootPW -LLL -Q_
+
+
 ### Web interface
 
 As seen during the installation processes, LDAP allows you to work with commands and _.ldif_ files to create and modify elements of the LDAP directory, but this can sometimes be a little difficult. LDAP offers LDAP directory browsers that make this task easier. Here we can highlight __phpldapadmin__, which is a graphical administration tool for managing LDAP servers. It can be installed as follows, which will enable the necessary Apache settings:
@@ -408,6 +423,7 @@ https://www.zytrax.com/books/ldap/ch2/index.html <br>
 https://www.pks.mpg.de/~mueller/docs/suse10.1/suselinux-manual_en/manual/sec.ldap.tree.html <br>
 https://www.digitalocean.com/community/tutorials/understanding-the-ldap-protocol-data-hierarchy-and-entry-components <br>
 https://github.com/manuparra/docker_ldap <br>
+https://www.digitalocean.com/community/tutorials/how-to-configure-openldap-and-perform-administrative-ldap-tasks <br>
 
 Server installation <br>
 https://likegeeks.com/es/servidor-ldap-de-linux/ <br>
