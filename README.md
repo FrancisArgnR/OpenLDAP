@@ -196,8 +196,9 @@ dn: uid=usuario,ou=People,dc=example,dc=com
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
-cn: Nombre
-sn: Usuario
+cn: First Name
+sn: Last Name
+uid: usuario
 userPassword: {SSHA}QLXFlVsiNY7bLgcwx8yurJqMZVaErD9b
 loginShell: /bin/bash
 uidNumber: 10000
@@ -228,7 +229,8 @@ _$ ldapsearch -x uid=usuario -b dc=example,dc=com -LLL_
 
 To delete an entry, use the following command with the name of the entry to be deleted (where the final password is the admin password):
 
-_$ ldapdelete "cn=user,ou=users,dc=example,dc=com" -D cn=admin,dc=example,dc=com -w password_
+_$ ldapdelete "uid=usuario,ou=People,dc=example,dc=com" -D "cn=admin,dc=example,dc=com" -w password_ <br>
+_$ ldapdelete -W "uid=usuario,ou=People,dc=example,dc=com" -D "cn=admin,dc=example,dc=com"_ <br>
 
 Finally, the LDAP service must be allowed in the __firewall__:
 
@@ -374,36 +376,16 @@ _$ getent passwd user_
 The most commonly used OpenLDAP commands include the following:
    - ldapbind: used to authenticate to a directory server.
    - ldapsearch: used to search for specific entries in a directory.
+       - Search for the entire structure of the DIT: _$ ldapsearch -x -b "dc=example,dc=com"_
+       - Search for a concrete ou (organizational unit): _$ ldapsearch -x -b "ou=People,dc=example,dc=com"_
+       - Search for a concrete user: _$ ldapsearch -x -b "uid=usuario,ou=People,dc=example,dc=com"_
    - ldapadd: used to add entries to a directory.
    - ldapdelete: used to delete entries in a directory.
    - ldapmodify: used to modify existing entries in a directory.
    - ldapmoddn: used to change the name of an entry or to move a subtree to another location in the directory.
+   - ldappasswd: used to modify the passwords.
+       - Set a new password for a user: _$ ldappasswd -x -D "cn=admin,dc=example,dc=com" -W -S "uid=usuario,ou=People,dc=example,dc=com"_
 
-### Concrete commands
-
-To access to the information of Root DSE, which is the structure that holds our DIT, we use:
-
-_$ ldapsearch -H ldap:// -x -s base -b "" -LLL "+"_
-
-If we wat to know the base entry of the DIT:
-
-_$ ldapsearch -H ldap:// -x -s base -b "" -LLL "namingContexts"_
-
-Finding the administration entry of the rootDN of the DIT we do:
-
-_$ sudo ldapsearch -H ldapi:// -Y EXTERNAL -b "cn=config" "(olcRootDN=*)" olcSuffix olcRootDN olcRootPW -LLL -Q_
-
-To see the entire structure of the DIT:
-
-_$ ldapsearch -x -b "dc=example,dc=com"_
-
-To see an ou (organizational unit) concrete:
-
-_$ ldapsearch -x -b "ou=People,dc=example,dc=com"_
-
-To see an user concrete:
-
-_$ ldapsearch -x -b "uid=usuario,ou=People,dc=example,dc=com"_
 
 ### Web interface
 
@@ -465,5 +447,8 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-op
 
 OpenLDAP commands <br>
 https://docs.oracle.com/cd/B10501_01/network.920/a96579/comtools.htm <br>
-https://docs.oracle.com/cd/E19455-01/806-5580/6jej518pf/index.html <br>
+
+Others <br>
+https://www.thegeekstuff.com/2015/02/openldap-add-users-groups/ <br>
+https://tylersguides.com/guides/openldap-how-to-add-a-user/ <br>
 
