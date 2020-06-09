@@ -74,7 +74,7 @@ _$ dnf -y install openldap openldap-servers openldap-clients_
 
 To __enable__ (start automatically at boot time) and __start__ the OpenLDAP server service you have to run:
 
-_$ systemctl enable slapd_
+_$ systemctl enable slapd_ <br>
 _$ systemctl start slapd_
 
 After installation, the LDAP administrator password must be established. This is done with the following command:
