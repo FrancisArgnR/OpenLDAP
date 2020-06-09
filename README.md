@@ -199,7 +199,7 @@ objectClass: shadowAccount
 cn: First Name
 sn: Last Name
 uid: usuario
-userPassword: {SSHA}QLXFlVsiNY7bLgcwx8yurJqMZVaErD9b
+userPassword: {SSHA}MI/malE7t763EWw7YiRzXsojGETmqMJq
 loginShell: /bin/bash
 uidNumber: 10000
 gidNumber: 10000
@@ -376,14 +376,27 @@ _$ getent passwd user_
 The most commonly used OpenLDAP commands include the following:
    - ldapbind: used to authenticate to a directory server.
    - ldapsearch: used to search for specific entries in a directory.
-       - Search for the entire structure of the DIT: _$ ldapsearch -x -b "dc=example,dc=com"_
-       - Search for a concrete ou (organizational unit): _$ ldapsearch -x -b "ou=People,dc=example,dc=com"_
-       - Search for a concrete user: _$ ldapsearch -x -b "uid=usuario,ou=People,dc=example,dc=com"_
    - ldapadd: used to add entries to a directory.
    - ldapdelete: used to delete entries in a directory.
    - ldapmodify: used to modify existing entries in a directory.
    - ldapmoddn: used to change the name of an entry or to move a subtree to another location in the directory.
-   - ldappasswd: used to modify the passwords.
+   - ldappasswd: used to modify passwords.
+
+The above commands contain the following common parameters, among others:
+   - -D: The DN.
+   - -W: Prompt for the password of the DN.
+   - -x: Use of simple authentication.
+   
+Some specific parameters of each command are as follows:
+   - ldappasswd:
+       - S: Prompt for the new password.
+
+Useful examples:
+   - ldapsearch:
+       - Search for the entire structure of the DIT: _$ ldapsearch -x -b "dc=example,dc=com"_
+       - Search for a concrete ou (organizational unit): _$ ldapsearch -x -b "ou=People,dc=example,dc=com"_
+       - Search for a concrete user: _$ ldapsearch -x -b "uid=usuario,ou=People,dc=example,dc=com"_
+   - ldappasswd: 
        - Set a new password for a user: _$ ldappasswd -x -D "cn=admin,dc=example,dc=com" -W -S "uid=usuario,ou=People,dc=example,dc=com"_
 
 
