@@ -55,6 +55,7 @@ This allows you to set all the attributes concerning the person within the entry
   _userPassword: password for the user_ <br> 
   _…_ <br> 
 
+
 ## OpenLDAP installation
 
 ### Previous recommendations
@@ -63,6 +64,8 @@ Before deploying OpenLDAP it would be convenient to update the system packages (
 
 _$ dnf update_ <br>
 _$ dnf upgrade_
+
+It is recommended that the node name is in the domain where the server will be created. The name must follow an FDN (fully distinguished name) format.
 
 ### Installation of the OpenLDAP server (Fedora)
 
@@ -390,6 +393,17 @@ Finding the administration entry of the rootDN of the DIT we do:
 
 _$ sudo ldapsearch -H ldapi:// -Y EXTERNAL -b "cn=config" "(olcRootDN=*)" olcSuffix olcRootDN olcRootPW -LLL -Q_
 
+To see the entire structure of the DIT:
+
+_$ ldapsearch -x -b "dc=example,dc=com"_
+
+To see an ou (organizational unit) concrete:
+
+_$ ldapsearch -x -b "ou=People,dc=example,dc=com"_
+
+To see an user concrete:
+
+_$ ldapsearch -x -b "uid=usuario,ou=People,dc=example,dc=com"_
 
 ### Web interface
 
