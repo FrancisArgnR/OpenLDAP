@@ -154,7 +154,7 @@ You can also check the configuration:
 
 _$ slaptest -u_
 
-_** Explanation of the previous file **
+_** Explanation of the previous file ** <br>
 To configure the database, you must modify the backend of the primary database (/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif) and also the access control list for the LDAP monitor backend (olcDatabase\={1}monitor.ldif).
 These modifications are not made directly on these files, instead they are made by generating an .ldif file containing the modifications. 
 In the .ldif file, to identify the element on which you want to act, its DN is used. Then the first line in the file must be the DN: dn: olcDatabase={2}hdb,cn=config. In the next line you have to specify if you want to add or modify, this is done through: changeType: modify. Then you must specify the element to be replaced or if you want to delete it: replace: olcSuffix. And finally write the new value of the changed attribute: olcSuffix: dc=domain,dc=local._
@@ -259,7 +259,7 @@ _$ sudo systemctl start slapd_ <br>
 _$ sudo systemctl enable slapd_ <br>
 _$ sudo systemctl status slapd_ <br>
 
-In addition, the __firewall must be opened__ to allow requests to the LDAP server daemon:
+In addition, the __firewall must be opened__ to allow requests to the LDAP server daemon (previous _sudo ufw enable_):
 
 _$ sudo ufw allow ldap_
 
@@ -389,7 +389,7 @@ The above commands contain the following common parameters, among others:
    
 Some specific parameters of each command are as follows:
    - ldappasswd:
-       - S: Prompt for the new password.
+       - -S: Prompt for the new password.
 
 Useful examples:
    - ldapsearch:
@@ -420,7 +420,7 @@ The first line refers to the name of your server, the second to which is the roo
 
 Now that the web interface is configured, the way to access it from the web browser is as follows:
 
-https://example.com/phpldapadmin
+_$ firefox http://dir_ip/phpldapadmin &_
 
 Where a home page appears for logging in. The login DN is the user name that is used, containing the account name (cn), and the server domain name (dc). 
 
@@ -429,6 +429,8 @@ Where a home page appears for logging in. The login DN is the user name that is 
 
 Once connected you have the possibility to add users, organizational units, groups and relationships.
 
+_** Possible appearance of errors on the web ** <br>
+An error may be displayed when running the website. This error will impede the correct use of the management website._
 
 ## References
 
@@ -460,8 +462,10 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-op
 
 OpenLDAP commands <br>
 https://docs.oracle.com/cd/B10501_01/network.920/a96579/comtools.htm <br>
+https://manpages.debian.org/jessie/ldap-utils/index.html <br>
 
 Others <br>
 https://www.thegeekstuff.com/2015/02/openldap-add-users-groups/ <br>
 https://tylersguides.com/guides/openldap-how-to-add-a-user/ <br>
+https://tylersguides.com/guides/how-to-change-an-openldap-password/ <br>
 
