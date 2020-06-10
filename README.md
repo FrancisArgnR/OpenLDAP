@@ -400,6 +400,7 @@ Useful examples:
    - ldappasswd: 
        - Set a new password for a user: _$ ldappasswd -x -D "cn=admin,dc=example,dc=com" -W -S "uid=usuario,ou=People,dc=example,dc=com"_
 
+_ ** If the search command is not executed on the server, i.e. it is executed on the client, then the server host must be specified with the -H ldap://dirIP_
 
 ### Web interface
 
@@ -469,5 +470,6 @@ Others <br>
 https://www.thegeekstuff.com/2015/02/openldap-add-users-groups/ <br>
 https://tylersguides.com/guides/openldap-how-to-add-a-user/ <br>
 https://tylersguides.com/guides/how-to-change-an-openldap-password/ <br>
+https://devconnected.com/how-to-search-ldap-using-ldapsearch-examples/ <br>
 https://www.youtube.com/watch?v=fPcIfftZTps <br>
-
+https://www.youtube.com/watch?v=Zmj6A5ggcgg&t <br>
