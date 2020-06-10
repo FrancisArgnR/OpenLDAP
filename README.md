@@ -400,7 +400,7 @@ Useful examples:
    - ldappasswd: 
        - Set a new password for a user: _$ ldappasswd -x -D "cn=admin,dc=example,dc=com" -W -S "uid=usuario,ou=People,dc=example,dc=com"_
 
-_ ** If the search command is not executed on the server, i.e. it is executed on the client, then the server host must be specified with the -H ldap://dirIP_
+_ ** If the search command is not executed on the server, i.e. it is executed on the client, then the server host must be specified with the_ -H ldap://dirIP
 
 ### Web interface
 
