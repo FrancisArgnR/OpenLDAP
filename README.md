@@ -430,7 +430,7 @@ Where a home page appears for logging in. The login DN is the user name that is 
 Once connected you have the possibility to add users, organizational units, groups and relationships.
 
 _** Possible appearance of errors on the web ** <br>
-Errors (deprecated autoload() & deprecated create_function()) may be displayed when running the website. These errors will impede the correct use of the management website. The solution to these errors is detailed in: https://stackoverflow.com/questions/50698477/cant-create-new-entry-phpldapadmin _
+Errors (deprecated autoload() & deprecated create_function()) may be displayed when running the website. These errors will impede the correct use of the management website. The solution to these errors is detailed in:_ https://stackoverflow.com/questions/50698477/cant-create-new-entry-phpldapadmin 
 
 ## References
 
