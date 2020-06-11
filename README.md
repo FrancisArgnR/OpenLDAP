@@ -234,12 +234,12 @@ _$ ldapdelete -W "uid=usuario,ou=People,dc=example,dc=com" -D "cn=admin,dc=examp
 
 Finally, the LDAP service must be allowed in the __firewall__:
 
-_$ firewall-cmd --add-service={ldap,ldaps} --permanent
-$ firewall-cmd --reload_
+_$ firewall-cmd --add-service={ldap,ldaps} --permanent <br>
+$ firewall-cmd --reload_ <br>
 
-ó
+ó <br>
 
-_$ firewall-cmd --permanent --add-service=ldapfirewall-cmd -reload_
+_$ firewall-cmd --permanent --add-service=ldapfirewall-cmd -reload_ <br>
 
 
 ### Installation of the OpenLDAP server (Ubuntu)
