@@ -100,7 +100,7 @@ And set the property of the LDAP database configuration directory to the ldap us
 
 _$ chown -R ldap:ldap /var/lib/ldap_
 
-Next, the basic OpenLDAP schemes must be imported:
+Next, the basic OpenLDAP schemas must be imported:
 
 _$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif_ <br>
 _$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif_ <br>
@@ -145,10 +145,10 @@ _$ ldapmodify -Y EXTERNAL -H ldapi:/// -f mod_domain.ldif_
 
 The following command can be used to verify that the changes have been made correctly:
 
-_$ ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config olcDatabase={2}mdb -LLL_
-ó
-_$ ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config olcDatabase=\*
-$ ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config olcDatabase={1}monitor -LLL_
+_$ ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config olcDatabase={2}mdb -LLL_ <br>
+ó <br>
+_$ ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config olcDatabase=\* <br>
+$ ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config olcDatabase={1}monitor -LLL_ <br>
 
 You can also check the configuration:
 
