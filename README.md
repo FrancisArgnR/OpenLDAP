@@ -80,7 +80,7 @@ To __enable__ (start automatically at boot time) and __start__ the OpenLDAP serv
 _$ systemctl enable slapd_ <br>
 _$ systemctl start slapd_
 
-After installation, the LDAP administrator password must be established. This is done with the following command:
+After installation, the LDAP administrator password must be established. First you have to generate a hash for the password that will be used later. This is done with the following command:
 
 _$ slappasswd_
 
