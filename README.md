@@ -470,6 +470,9 @@ Others <br>
 https://www.thegeekstuff.com/2015/02/openldap-add-users-groups/ <br>
 https://tylersguides.com/guides/openldap-how-to-add-a-user/ <br>
 https://tylersguides.com/guides/how-to-change-an-openldap-password/ <br>
+https://simp.readthedocs.io/en/master/user_guide/User_Management/LDAP.html <br>
+https://www.techrepublic.com/article/how-to-populate-an-ldap-server-with-users-and-groups-via-phpldapadmin/ <br>
 https://devconnected.com/how-to-search-ldap-using-ldapsearch-examples/ <br>
 https://www.youtube.com/watch?v=fPcIfftZTps <br>
 https://www.youtube.com/watch?v=Zmj6A5ggcgg&t <br>
+https://www.youtube.com/watch?v=l0e8rG0mku8 <br>
