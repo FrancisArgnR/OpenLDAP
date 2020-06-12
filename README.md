@@ -450,6 +450,7 @@ https://www.server-world.info/en/note?os=Fedora_28&p=openldap&f=1 <br>
 https://www.tecmint.com/install-openldap-server-for-centralized-authentication/ <br>
 https://instructorbenyblanco.wordpress.com/configuracion-basica-de-servidor-ldap/ <br>
 https://www.techrepublic.com/article/how-to-install-openldap-on-ubuntu-18-04/ <br>
+https://es.linux-console.net/?p=137 <br>
 
 Client installation <br>
 https://www.tecmint.com/configure-ldap-client-to-connect-external-authentication/ <br>
@@ -457,6 +458,7 @@ https://computingforgeeks.com/how-to-configure-ubuntu-18-04-ubuntu-16-04-lts-as-
 https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/configure-ldap-client-on-ubuntu-16-04-debian-8.html <br>
 https://www.howtoforge.com/set-up-openldap-client-on-debian-10/ <br>
 http://somebooks.es/12-9-configurar-un-equipo-cliente-con-ubuntu-para-autenticarse-en-el-servidor-openldap/ <br>
+https://es.linux-console.net/?p=139 <br>
 
 Web interface <br>
 https://www.alibabacloud.com/blog/how-to-install-openldap-and-phpldapadmin-on-ubuntu-16-04_594318 <br>
