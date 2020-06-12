@@ -459,6 +459,7 @@ https://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/configure-ldap-client-on-ub
 https://www.howtoforge.com/set-up-openldap-client-on-debian-10/ <br>
 http://somebooks.es/12-9-configurar-un-equipo-cliente-con-ubuntu-para-autenticarse-en-el-servidor-openldap/ <br>
 https://es.linux-console.net/?p=139 <br>
+https://proyectos.interior.edu.uy/projects/gestion-de-la-sala-de-telecomunicaciones/wiki/Autentificaci%C3%B3n-OpenLDAP/1 <br>
 
 Web interface <br>
 https://www.alibabacloud.com/blog/how-to-install-openldap-and-phpldapadmin-on-ubuntu-16-04_594318 <br>
