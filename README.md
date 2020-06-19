@@ -318,7 +318,7 @@ _sudo apt-get remove --purge ldap-utils_ <br>
 
 ### Installation of the OpenLDAP client (Ubuntu)
 
-Once an OpenLDAP server is configured, the client needs to be installed and configured in order to connect. First, several packages need to be installed (you can also replace the final nscd with nslcd):
+Once an OpenLDAP server is configured, the client needs to be installed and configured in order to connect. First, several packages need to be installed (you can also replace the final nscd with nslcd)(better use nslcd, that's the way it's worked for me)(since nslcd is a daemon that will make LDAP queries for local processes that want to do user authentication, authorization or password modification (PAM)):
 
 _$ sudo apt-get –y install libnss-ldap libpam-ldap ldap-utils nscd_ <br>
 _$ sudo apt install libnss-ldap libpam-ldap ldap-utils nscd_ <br>
@@ -360,10 +360,10 @@ Session:
 required pam_mkhomedir.so umask=0022 skel=/etc/skel
 ```
 
-The NCSD service is then restarted:
+The NCSD (or NSLCD) service is then enabled and restarted:
 
-_$ sudo systemctl restart nscd_ <br>
-_$ sudo systemctl enable nscd_ <br>
+_$ sudo systemctl enable nscd_ or _sudo update-rc.d nslcd enable_ <br>
+_$ sudo systemctl restart nscd_ or _/etc/init.d/nscd restart_ <br>
 
 To verify that the client configuration has been done correctly, check that a user can be obtained from the server:
 
