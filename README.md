@@ -241,6 +241,10 @@ $ firewall-cmd --reload_ <br>
 
 _$ firewall-cmd --permanent --add-service=ldapfirewall-cmd -reload_ <br>
 
+To remove the installation, first list the installed packages and then remove:
+
+_$ sudodnf history userinstalled_ <br>
+_$ sudo dnf remove package_ <br>
 
 ### Installation of the OpenLDAP server (Ubuntu)
 
@@ -249,7 +253,7 @@ _$ firewall-cmd --permanent --add-service=ldapfirewall-cmd -reload_ <br>
 If you are using Ubuntu as a system, the installation process is very similar. First of all you have to __install__ the slapd package and it is also convenient to install the ldap-utils package:
 
 _$ sudo apt-get install slapd_ <br>
-_$ sudo apt-get install ldap-utils_
+_$ sudo apt-get install ldap-utils_ <br>
 
 During the installation of the package, the administration password will be requested in the LDAP directory.
 
@@ -310,9 +314,9 @@ _$ sudo passwd tecmint_ <br>
 
 To uninstall the server is used:
 
-_sudo apt-get remove slapd_ <br>
+_sudo apt-get remove slapd_ or _sudo apt remove sldap_<br>
 _sudo apt-get remove --purge slapd_ <br>
-_sudo apt-get remove ldap-utils_ <br>
+_sudo apt-get remove ldap-utils_ or _sudo apt remove ldap-utils_<br>
 _sudo apt-get remove --purge ldap-utils_ <br>
 
 
@@ -367,7 +371,12 @@ _$ sudo systemctl restart nscd_ or _/etc/init.d/nscd restart_ <br>
 
 To verify that the client configuration has been done correctly, check that a user can be obtained from the server:
 
-_$ getent passwd user_
+_$ getent passwd user_ <br>
+
+To remove installed client packages:
+
+_$ sudo apt-get remove ldap-auth-client ldap-utils libnss-ldap libpam-ldap ldap-utils nscd_ <br>
+_$ sudo apt-get autoremove --purge ldap-auth-client ldap-utils libnss-ldap libpam-ldap ldap-utils nscd_ <br>
 
 
 ## OpenLDAP MANAGEMENT FUNCTIONALITIES
