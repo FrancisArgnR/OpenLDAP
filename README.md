@@ -143,6 +143,8 @@ Then add the above configuration to the LDAP database with the command:
 
 _$ ldapmodify -Y EXTERNAL -H ldapi:/// -f mod_domain.ldif_
 
+Some error may be generated because the database installed is different from the one in the example (BDB, HDB, MDB, ...).
+
 The following command can be used to verify that the changes have been made correctly:
 
 _$ ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config olcDatabase={2}mdb -LLL_ <br>
