@@ -329,7 +329,7 @@ Once an OpenLDAP server is configured, the client needs to be installed and conf
 _$ sudo apt-get –y install libnss-ldap libpam-ldap ldap-utils nscd_ <br>
 _$ sudo apt install libnss-ldap libpam-ldap ldap-utils nscd_ <br>
 
-During the installation, the package installer will require a few parameters from the server for configuration (the ldap-auth-config package that is installed automatically does most of the configuration). You will be asked to enter the OpenLDAP server address, the domain name (dc: example, dc: com), the LDAP version, the administration account, etc. If during the installation process we detect any error or we have introduced some parameter incorrectly, we can always do it again by executing the command:
+During the installation, the package installer will require a few parameters from the server for configuration (the ldap-auth-config package that is installed automatically does most of the configuration). You will be asked to enter the OpenLDAP server address (here it is important to use the ldap option instead of ldapi), the domain name (dc: example, dc: com), the LDAP version, the administration account, etc. If during the installation process we detect any error or we have introduced some parameter incorrectly, we can always do it again by executing the command:
 
 _$ sudo dpkg-reconfigure ldap-auth-config_
 
