@@ -14,6 +14,7 @@
 * [OpenLDAP management functionalities](#openldap-management-functionalities)
   * [Basic commands](#basic-commands)
   * [Web interface](#web-interface)
+* [OpenLDAP migration](#openldap-migration)
 * [References](#references)
 
 ====================
@@ -445,6 +446,21 @@ Once connected you have the possibility to add users, organizational units, grou
 _** Possible appearance of errors on the web ** <br>
 Errors (deprecated autoload() & deprecated create_function()) may be displayed when running the website. These errors will impede the correct use of the management website. The solution to these errors is detailed in:_ https://stackoverflow.com/questions/50698477/cant-create-new-entry-phpldapadmin 
 
+
+## OpenLDAP migration
+
+With the command _slapcat_ it is possible to generate a copy of the elements of the OpenLDAP database in .ldif format (depending on the type of OpenLDAP database you can do it directly or you must stop the OpenLDAP service). To do this, you must specify the part of the database you want to copy (-b). The following command performs this action and generates the .ldif file (-l):
+
+_$ slapcat -l slapd.ldif -b "dc=example,dc=com"_
+
+To insert the copied objects into another OpenLDAP server, the following command is executed:
+
+_$ slapadd -v -l slapd.ldif_
+
+It is important to point out that in this .ldif file the domain must be changed to the new domain of the server where the data will be imported. In case you cannot see the added data properly, try to add them with the _ldapadd_ command as it is done in the installation process.
+
+Examples of a complete migration can be found in the references.
+
 ## References
 
 LDAP definition <br>
@@ -480,6 +496,11 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-op
 OpenLDAP commands <br>
 https://docs.oracle.com/cd/B10501_01/network.920/a96579/comtools.htm <br>
 https://manpages.debian.org/jessie/ldap-utils/index.html <br>
+
+OpenLDAP migration <br>
+http://servidor.dokry.com/cmo-migrar-ldap-database-esquema-configuration-a-otra-mquina.html <br>
+https://rm-rf.es/generar-un-backup-en-ldif-de-openldap-con-slapcat/ <br>
+https://linux.die.net/man/8/slapcat <br>
 
 Others <br>
 https://www.thegeekstuff.com/2015/02/openldap-add-users-groups/ <br>
