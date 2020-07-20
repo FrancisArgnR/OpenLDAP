@@ -325,7 +325,7 @@ _sudo apt-get remove --purge ldap-utils_ <br>
 
 ### Installation of the OpenLDAP client (Ubuntu)
 
-Once an OpenLDAP server is configured, the client needs to be installed and configured in order to connect. First, several packages need to be installed (you can also replace the final nscd with nslcd)(better use nslcd, that's the way it's worked for me)(since nslcd is a daemon that will make LDAP queries for local processes that want to do user authentication, authorization or password modification (PAM)):
+Once an OpenLDAP server is configured, the client needs to be installed and configured in order to connect. First, several packages need to be installed (you can also replace the final nscd with nslcd)(better use nslcd, that's the way it's worked for me)(since nslcd is a daemon that will make LDAP queries for local processes that want to do user authentication, authorization or password modification (PAM))(It is also possible to use libnss-ldapd and libpam-ldapd, and even combine them):
 
 _$ sudo apt-get –y install libnss-ldap libpam-ldap ldap-utils nscd_ <br>
 _$ sudo apt install libnss-ldap libpam-ldap ldap-utils nscd_ <br>
