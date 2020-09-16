@@ -15,6 +15,7 @@
   * [Basic commands](#basic-commands)
   * [Web interface](#web-interface)
 * [OpenLDAP migration](#openldap-migration)
+* [Docker with LDAP](#docker-with-ldap)
 * [References](#references)
 
 ====================
@@ -461,6 +462,32 @@ It is important to point out that in this .ldif file the domain must be changed 
 
 Examples of a complete migration can be found in the references.
 
+
+
+## Docker with LDAP
+
+An alternative to manually installing your own OpenLDAP server is to use a docker container that already has it installed. The first step is to install docker in the server (this task is not the purpose of this tutorial). Once you have it installed, you must download from the image repository a container that has OpenLDAP installed. In this case, the image used is: _osixia/openldap:1.4.0_. You can search the image in the repository as follows:
+
+_$ docker search openldap_
+
+In this example, the docker container with openldap is downloaded, configured and launched directly with the following command:
+
+_$ docker run -p 389:389 --name docker-openldap-service --hostname docker-server.example.com --env LDAP_ORGANISATION="Example" --env LDAP_DOMAIN="example.com" --env LDAP_ADMIN_PASSWORD="password" --env LDAP_BASE_DN="dc=example,dc=com" --detach osixia/openldap:1.4.0_
+
+Where it maps the port on which OpenLDAP works, it sets the name of the container, the domain, the base_dn, or the docker image that is installed, among other things. 
+
+Once this is done, to add groups or users you can pass the .ldif file from the server to the container:
+
+_$ docker cp /root/addUsers.ldif docker-openldap-service:/root/addUsers.ldif_
+
+Enter into the container:
+
+_$ docker exec -i -t docker-openldap-service /bin/bash_
+
+And add them in the same way as shown earlier in the tutorial:
+
+_$ ldapadd -x -D cn=admin,dc=example,dc=com -W -f addUsers.ldif_
+
 ## References
 
 LDAP definition <br>
@@ -501,6 +528,10 @@ OpenLDAP migration <br>
 http://servidor.dokry.com/cmo-migrar-ldap-database-esquema-configuration-a-otra-mquina.html <br>
 https://rm-rf.es/generar-un-backup-en-ldif-de-openldap-con-slapcat/ <br>
 https://linux.die.net/man/8/slapcat <br>
+
+Docker with OpenLDAP <br>
+https://scytalelabs.com/setup-and-configure-openldap-using-docker-image-on-ubuntu-16-04/ <br>
+https://github.com/osixia/docker-openldap#beginner-guide <br>
 
 Others <br>
 https://www.thegeekstuff.com/2015/02/openldap-add-users-groups/ <br>
