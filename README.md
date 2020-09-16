@@ -488,6 +488,8 @@ And add them in the same way as shown earlier in the tutorial:
 
 _$ ldapadd -x -D cn=admin,dc=example,dc=com -W -f addUsers.ldif_
 
+On the other hand, the installation of the client is done in the same way.
+
 ## References
 
 LDAP definition <br>
