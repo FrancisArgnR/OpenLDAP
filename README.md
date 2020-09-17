@@ -69,6 +69,8 @@ _$ dnf upgrade_
 
 It is recommended that the node name is in the domain where the server will be created. The name must follow an FDN (fully distinguished name) format.
 
+_$ hostnamectl set-hostname server.example.com_
+
 ### Installation of the OpenLDAP server (Fedora)
 
 #### Installation
