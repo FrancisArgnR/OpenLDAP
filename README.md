@@ -353,6 +353,21 @@ Next, the use of LDAP for authentication is configured by updating the PAM setti
 
 _$ sudo pam-auth-update_
 
+If problems occur or users are not seen, run better:
+
+_$ sudo pam-auth-update --force_
+
+And select the following [*] :
+
+  │    [ ] Pwquality password strength checking                                                                  │ 
+  │    [*] Unix authentication                                                                                   │ 
+  │    [ ] SSS authentication                                                                                    │ 
+  │    [*] LDAP Authentication                                                                                   │ 
+  │    [*] Register user sessions in the systemd control group hierarchy                                         │ 
+  │    [*] Create home directory on login                                                                        │ 
+  │    [*] Inheritable Capabilities Management
+
+
 Finally, if you want to establish a home directory to be created automatically with the first login of the user, you have to add the following lines to the _/etc/pam.d/common-session_ file:
 
 ```
