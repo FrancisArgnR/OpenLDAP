@@ -331,7 +331,9 @@ _sudo apt-get remove --purge ldap-utils_ <br>
 Once an OpenLDAP server is configured, the client needs to be installed and configured in order to connect. First, several packages need to be installed (you can also replace the final nscd with nslcd)(better use nslcd, that's the way it's worked for me)(since nslcd is a daemon that will make LDAP queries for local processes that want to do user authentication, authorization or password modification (PAM))(It is also possible to use libnss-ldapd and libpam-ldapd, and even combine them):
 
 _$ sudo apt-get purge libnss-ldap libpam-ldap ldap-utils_ <br>
+and <br>
 _$ sudo apt-get –y install libnss-ldap libpam-ldap ldap-utils nscd_ <br>
+or <br>
 _$ sudo apt install libnss-ldap libpam-ldap ldap-utils nscd_ <br>
 
 During the installation, the package installer will require a few parameters from the server for configuration (the ldap-auth-config package that is installed automatically does most of the configuration). You will be asked to enter the OpenLDAP server address (here it is important to use the ldap option instead of ldapi), the domain name (dc: example, dc: com), the LDAP version, the administration account, etc. If during the installation process we detect any error or we have introduced some parameter incorrectly, we can always do it again by executing the command:
