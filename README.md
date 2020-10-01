@@ -330,6 +330,7 @@ _sudo apt-get remove --purge ldap-utils_ <br>
 
 Once an OpenLDAP server is configured, the client needs to be installed and configured in order to connect. First, several packages need to be installed (you can also replace the final nscd with nslcd)(better use nslcd, that's the way it's worked for me)(since nslcd is a daemon that will make LDAP queries for local processes that want to do user authentication, authorization or password modification (PAM))(It is also possible to use libnss-ldapd and libpam-ldapd, and even combine them):
 
+_$ sudo apt-get purge libnss-ldap libpam-ldap ldap-utils_
 _$ sudo apt-get –y install libnss-ldap libpam-ldap ldap-utils nscd_ <br>
 _$ sudo apt install libnss-ldap libpam-ldap ldap-utils nscd_ <br>
 
@@ -357,8 +358,9 @@ If problems occur or users are not seen, run better:
 
 _$ sudo pam-auth-update --force_
 
-And select the following [*] :
+And select the following ```[*]``` :
 
+```
   │    [ ] Pwquality password strength checking                                                                  │ 
   │    [*] Unix authentication                                                                                   │ 
   │    [ ] SSS authentication                                                                                    │ 
@@ -366,7 +368,7 @@ And select the following [*] :
   │    [*] Register user sessions in the systemd control group hierarchy                                         │ 
   │    [*] Create home directory on login                                                                        │ 
   │    [*] Inheritable Capabilities Management
-
+```
 
 Finally, if you want to establish a home directory to be created automatically with the first login of the user, you have to add the following lines to the _/etc/pam.d/common-session_ file:
 
