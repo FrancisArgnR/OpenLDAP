@@ -546,6 +546,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-op
 OpenLDAP commands <br>
 https://docs.oracle.com/cd/B10501_01/network.920/a96579/comtools.htm <br>
 https://manpages.debian.org/jessie/ldap-utils/index.html <br>
+https://www.digitalocean.com/community/tutorials/how-to-use-ldif-files-to-make-changes-to-an-openldap-system <br>
 
 OpenLDAP migration <br>
 http://servidor.dokry.com/cmo-migrar-ldap-database-esquema-configuration-a-otra-mquina.html <br>
