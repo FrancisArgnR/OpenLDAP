@@ -463,7 +463,8 @@ Where a home page appears for logging in. The login DN is the user name that is 
 ![web](https://tr1.cbsistatic.com/hub/i/r/2016/12/01/0a8ad7b4-1684-4295-84c8-64bfe33ee6b9/resize/1200x/a773679c11ab780c1513b5a5d3d342d1/ldapb.jpg)
 *Image obtained from: https://www.techrepublic.com/article/how-to-install-and-configure-ldap-and-phpldapadmin/*
 
-Once connected you have the possibility to add users, organizational units, groups and relationships.
+Once connected you have the possibility to add users, organizational units, groups and relationships:
+ - Add members to group: <br> https://www.techrepublic.com/article/how-to-populate-an-ldap-server-with-users-and-groups-via-phpldapadmin/ <br>
 
 _** Possible appearance of errors on the web ** <br>
 Errors (deprecated autoload() & deprecated create_function()) may be displayed when running the website. These errors will impede the correct use of the management website. The solution to these errors is detailed in:_ https://stackoverflow.com/questions/50698477/cant-create-new-entry-phpldapadmin 
